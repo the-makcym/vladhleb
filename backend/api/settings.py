@@ -28,12 +28,15 @@ SECRET_KEY = os.environ.get(
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get('DJANGO_DEBUG', default=0))
+#DEBUG = int(os.environ.get('DJANGO_DEBUG', default=0))
+DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
 ]
+
+AUTH_USER_MODEL = 'bakery.User'
 
 
 # Application definition
@@ -45,9 +48,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'bakery',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
+
 ]
 
 MIDDLEWARE = [
@@ -174,3 +179,6 @@ CORS_ALLOW_HEADERS = [
 
     "Authorization",
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
