@@ -1,8 +1,49 @@
-from .models import User
+from .models import User, Address
 from rest_framework import serializers
 
 
 class UserSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'email', 'username', 'address', 'password']
+
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+
+    def create(self, validated_data):
+        password = validated_data.pop('password', None)
+        instance = self.Meta.model(**validated_data)
+        if password is not None:
+            instance.set_password(password)
+        address = validated_data.get('address')
+        address.is_free=False
+        address.save()
+        instance.save()
+        return instance
+
+
+class UserLoginSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('email', 'password')
+
+
+class UserLogoutSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('email', 'password')
+
+
+class AddressSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = Address
+        fields = ('id', 'name')
+
+
+class UserSerializeProfile(serializers.ModelSerializer):
+    address = serializers.CharField(source="address.name")
+
     class Meta:
         model = User
         fields = ['id', 'email', 'username', 'address', 'password']
@@ -19,3 +60,6 @@ class UserSerialize(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
+
+

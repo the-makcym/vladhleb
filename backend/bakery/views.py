@@ -1,22 +1,27 @@
 from django.shortcuts import render
-from . models import User
-from . serializer import UserSerialize
+from .models import User, Address
+from .serializer import UserSerialize
 import jwt
 import datetime
 from rest_framework.views import APIView
+from rest_framework.generics import RetrieveAPIView, CreateAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
+from django.contrib.auth import get_user_model, login, authenticate
+from .serializer import UserSerialize, UserLoginSerialize, UserLogoutSerialize, UserSerializeProfile, AddressSerialize
+from rest_framework import permissions, status
+from django.shortcuts import get_object_or_404
 
 
-class RegisterApiView(APIView):
-    def post(self, request):
-        serializer = UserSerialize(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data)
+class RegisterApiView(CreateAPIView):
+    model = get_user_model()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = UserSerialize
 
 
-class LoginApiView(APIView):
+class LoginApiView(CreateAPIView):
+    serializer_class = UserLoginSerialize
+
     def post(self, request):
         email = request.data['email']
         password = request.data['password']
@@ -42,7 +47,7 @@ class LoginApiView(APIView):
         response.set_cookie(key='jwt', value=token, httponly=True)
 
         response.data = {
-            'jwt token' : token
+            'jwt token': token
         }
 
         return response
@@ -62,12 +67,19 @@ class UserApiView(APIView):
             raise AuthenticationFailed("User is unauthenticated")
 
         user = User.objects.filter(id=payload['id']).first()
-        serializer = UserSerialize(user)
+        serializer = UserSerializeProfile(user)
 
         return Response(serializer.data)
 
 
-class LogoutApiView(APIView):
+class AddressApiView(ListAPIView):
+    queryset = Address.objects.filter(is_free=True)
+    serializer_class = AddressSerialize
+
+
+class LogoutApiView(CreateAPIView):
+    serializer_class = UserLogoutSerialize
+
     def post(self, request):
         response = Response()
         response.delete_cookie('jwt')
