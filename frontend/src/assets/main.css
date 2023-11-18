@@ -1,35 +1,80 @@
-@import './base.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto&display=swap');
 
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+:root {
+  color-scheme: light;
+  color: rgba(255, 255, 255, 0.87);
 
-  font-weight: normal;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+button {
+  border: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
 a,
-.green {
+button,
+li,
+input,
+div {
+  padding: 0;
+  margin: 0;
   text-decoration: none;
-  color: hsla(160, 100%, 37%, 1);
-  transition: 0.4s;
+  font-size: 1em;
+  color: black
 }
 
-@media (hover: hover) {
-  a:hover {
-    background-color: hsla(160, 100%, 37%, 0.2);
-  }
+.inter {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
 }
 
-@media (min-width: 1024px) {
-  body {
-    display: flex;
-    place-items: center;
-  }
+.roboto {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
 
-  #app {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding: 0 2rem;
-  }
+.large {
+  font-size: 1.4em;
+}
+
+.medium {
+  font-size: 1.1em;
+}
+
+.small {
+  font-size: 0.8em;
+}
+
+.gray {
+  color: #8C8C8C;
+}
+
+.red {
+  color: #BA1717;
+}
+
+.green {
+  color: #1A8E42;
+}
+
+.blue {
+  color: #14607E;
 }
