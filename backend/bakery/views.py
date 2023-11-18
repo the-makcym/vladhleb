@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import User
+from .models import User, Address
 from .serializer import UserSerialize
 import jwt
 import datetime
@@ -8,8 +8,9 @@ from rest_framework.generics import RetrieveAPIView, CreateAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import get_user_model, login, authenticate
-from .serializer import UserSerialize, UserLoginSerialize, UserLogoutSerialize
+from .serializer import UserSerialize, UserLoginSerialize, UserLogoutSerialize, UserSerializeProfile, AddressSerialize
 from rest_framework import permissions, status
+from django.shortcuts import get_object_or_404
 
 
 class RegisterApiView(CreateAPIView):
@@ -66,13 +67,19 @@ class UserApiView(APIView):
             raise AuthenticationFailed("User is unauthenticated")
 
         user = User.objects.filter(id=payload['id']).first()
-        serializer = UserSerialize(user)
+        serializer = UserSerializeProfile(user)
 
         return Response(serializer.data)
 
 
+class AddressApiView(ListAPIView):
+    queryset = Address.objects.filter(is_free=True)
+    serializer_class = AddressSerialize
+
+
 class LogoutApiView(CreateAPIView):
     serializer_class = UserLogoutSerialize
+
     def post(self, request):
         response = Response()
         response.delete_cookie('jwt')
