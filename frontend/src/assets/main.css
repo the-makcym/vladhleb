@@ -38,7 +38,7 @@ div {
   margin: 0;
   text-decoration: none;
   font-size: 1em;
-  color: black
+  color: black;
 }
 
 .inter {
@@ -51,30 +51,34 @@ div {
   font-weight: 400;
 }
 
+.extralarge {
+  font-size: 2em;
+}
+
 .large {
-  font-size: 1.4em;
+  font-size: 1.5em;
 }
 
 .medium {
-  font-size: 1.1em;
+  font-size: 1.2em;
 }
 
 .small {
-  font-size: 0.8em;
+  font-size: 0.9em;
 }
 
 .gray {
-  color: #8C8C8C;
+  color: #8c8c8c;
 }
 
 .red {
-  color: #BA1717;
+  color: #ba1717;
 }
 
 .green {
-  color: #1A8E42;
+  color: #1a8e42;
 }
 
 .blue {
-  color: #14607E;
+  color: #14607e;
 }
