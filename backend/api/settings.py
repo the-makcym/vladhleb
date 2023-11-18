@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'corsheaders',
-
 ]
 
 MIDDLEWARE = [
@@ -92,12 +91,8 @@ WSGI_APPLICATION = 'api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get('SQL_ENGINE', default='django.db.backends.sqlite3'),
-        'NAME': os.environ.get('SQL_DATABASE', default=(BASE_DIR / 'db.sqlite3')),
-        'USER': os.environ.get('SQL_USER', default='user'),
-        'PASSWORD': os.environ.get('SQL_PASSWORD', default='password'),
-        'HOST': os.environ.get('SQL_HOST', default='localhost'),
-        'PORT': os.environ.get('SQL_PORT', default='5500'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
