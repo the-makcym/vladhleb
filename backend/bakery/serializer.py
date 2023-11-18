@@ -19,3 +19,9 @@ class UserSerialize(serializers.ModelSerializer):
             instance.set_password(password)
         instance.save()
         return instance
+
+
+class UserLoginSerialize(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('email', 'password')
