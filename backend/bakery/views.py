@@ -8,7 +8,7 @@ from rest_framework.generics import RetrieveAPIView, CreateAPIView, ListAPIView
 from rest_framework.response import Response
 from rest_framework.exceptions import AuthenticationFailed
 from django.contrib.auth import get_user_model, login, authenticate
-from .serializer import UserSerialize, UserLoginSerialize
+from .serializer import UserSerialize, UserLoginSerialize, UserLogoutSerialize
 from rest_framework import permissions, status
 
 
@@ -71,7 +71,8 @@ class UserApiView(APIView):
         return Response(serializer.data)
 
 
-class LogoutApiView(APIView):
+class LogoutApiView(CreateAPIView):
+    serializer_class = UserLogoutSerialize
     def post(self, request):
         response = Response()
         response.delete_cookie('jwt')
