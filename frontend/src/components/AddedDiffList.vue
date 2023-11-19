@@ -3,7 +3,7 @@ import { defineComponent } from 'vue'
 import DiffElem from '@/components/DiffElem.vue'
 
 export default defineComponent({
-  name: 'diff-list',
+  name: 'added-diff-list',
 
   components: { DiffElem },
 
@@ -17,8 +17,7 @@ export default defineComponent({
     colorClass() {
       return {
         green: this.color == 'green',
-        red: this.color == 'red',
-        blue: this.color == 'blue'
+        red: this.color == 'red'
       }
     }
   },
@@ -32,7 +31,9 @@ export default defineComponent({
   <div class="container">
     <div class="row">
       <div v-for="(qty, name, idx) in this.list" class="col">
-        <diff-elem :name="name" :qty="qty"></diff-elem>
+        <div v-if="qty[0] > qty[2]">
+          <diff-elem :name="name" :qty="qty[0] - qty[2]"></diff-elem>
+        </div>
       </div>
     </div>
   </div>

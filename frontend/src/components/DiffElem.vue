@@ -13,8 +13,8 @@ export default defineComponent({
 
 <template>
   <div class="wrapper">
-      <h2 class="lato small black name">{{ name }}</h2>
-      <p class="lato small gray qty">{{ qty }} шт</p>
+    <h2 class="lato small black name">{{ name }}</h2>
+    <p class="lato small gray qty">{{ qty }} шт</p>
   </div>
 </template>
 

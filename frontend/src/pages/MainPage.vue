@@ -13,11 +13,7 @@ export default defineComponent({
 
 <template>
   <div class="sidebar">
-    <img src="" alt="" />
-    <img src="" alt="" />
-    <p class="lato black small">Товары</p>
-    <img src="" alt="" />
-    <p class="lato black small">Отчеты</p>
+    <img src="../assets/logo.png" class="logo" />
   </div>
 
   <div class="wrapper">
@@ -40,6 +36,11 @@ export default defineComponent({
   width: 8%;
   padding: 0 0.5vw;
   text-align: center;
+}
+
+.logo {
+  width: 100%;
+  user-select: none;
 }
 
 .wrapper {

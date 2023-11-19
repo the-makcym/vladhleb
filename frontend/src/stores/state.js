@@ -1,24 +1,52 @@
 import { defineStore } from 'pinia'
-import axios from 'axios'
 
 export const useStateStore = defineStore('state', {
   state: () => ({
-    addresses: [],
-    history: [100000, 90000, 125000, 100000, 150000, 190000, 170000]
+    list: {
+      'Хлеб Подольский': [10, 50, 0],
+      'Батон Нарезной': [10, 50, 0],
+      'Мой Зерновой Хлеб': [10, 50, 0],
+      'Хлеб Совитал фруктовый': [10, 50, 0],
+      'Хлеб Зерновой': [10, 50, 0],
+      'Хлеб Ржаное чудо': [10, 50, 0],
+      'Ролл пшеничный': [10, 50, 10],
+      'Ролл пшеничный сырный': [10, 50, 30],
+      'Булочка для гамбургера': [10, 50, 0],
+      'Булочка для хотдога': [10, 50, 20],
+      'Кекс Ромовый с шоколадом': [10, 50, 10],
+      'Плюшка Московская': [10, 50, 0],
+      'Слойка Приморская с брусникой': [10, 50, 10],
+      'Пирог Купеческий': [10, 50, 0],
+      'Пирог Венский с персиком': [10, 50, 40],
+    }
   }),
 
   getters: {
-    adrs: (state) => {
-      if (state.addresses.length == 0) {
-        axios.get('api/addresses/').then(function (response) {
-          state.addresses = response.data.addresses
-        })
+    prod: (state) => state.list,
+
+    total: (state) => {
+      var res = 0;
+      for (const [name, qty] of Object.entries(state.list)) {
+        res += qty[0];
       }
-      return state.addresses
-    }
+      return res;
+    },
+
+    price: (state) => {
+      var res = 0;
+      for (const [name, qty] of Object.entries(state.list)) {
+        res += qty[0] * qty[1];
+      }
+      return res;
+    },
   },
 
   actions: {
-    aboba() {}
+    inc(name) {
+      this.list[name][0]++;
+    },
+    red(name) {
+      this.list[name][0]--;
+    }
   }
 })

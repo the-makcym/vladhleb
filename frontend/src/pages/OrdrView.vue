@@ -1,33 +1,34 @@
 <script>
 import { defineComponent } from 'vue'
-import DiffList from '@/components/DiffList.vue'
+import { mapStores } from 'pinia'
+import { useStateStore } from '@/stores/state'
+import AddedDiffList from '@/components/AddedDiffList.vue'
+import RemovedDiffList from '@/components/RemovedDiffList.vue'
+import StatsBar from '../components/StatsBar.vue'
+import OrdrRow from '../components/OrdrRow.vue'
 
 export default defineComponent({
   name: 'ordr-view',
 
-  components: { DiffList },
+  components: { AddedDiffList, RemovedDiffList, StatsBar, OrdrRow },
 
-  data() {
-    return {
-      added: {
-        'Асфальтная крошка': 10,
-        'Слойка без хрени': 10,
-        'Что такое помела': 10,
-        'Помела что такое': 10,
-        'Помела свежая': 10,
-      },
-      removed: {
-        'Печенье с селедкой': 15,
-        'Слойка с хреном': 10,
-        'Хлеб с дырками': 10,
-        'Мемы про чай': 10,
-        'Вафли со вкусом парацетамола': 10,
-        'WD-40': 10,
-        'Торт сметанный': 10,
-        'Эчпочмак татарский': 10,
-        'Пельмени жареные': 10,
-        'Дизельное топливо': 10,
-      },
+  computed: {
+    ...mapStores(useStateStore),
+
+    total() {
+      var res = 0;
+      for (const [name, qty] of Object.entries(this.stateStore.prod)) {
+        res += qty[0];
+      }
+      return res;
+    },
+    
+    price() {
+      var res = 0;
+      for (const [name, qty] of Object.entries(this.stateStore.prod)) {
+        res += qty[0] * qty[1];
+      }
+      return res;
     }
   }
 })
@@ -52,10 +53,10 @@ export default defineComponent({
     </router-link>
   </div>
 
-<div class="button-row">
-  <router-link to="make">
-    <p class="button make lato medium black">Изменить таблицу</p>
-  </router-link>
+  <div class="button-row">
+    <router-link to="make">
+      <p class="button make lato medium black">Изменить таблицу</p>
+    </router-link>
     <router-link to="ordr">
       <p class="button pale-bg lato medium white">Оформить заказ</p>
     </router-link>
@@ -65,89 +66,37 @@ export default defineComponent({
     <div class="order">
       <div class="container">
         <div class="row">
-          <div class="col-3 lato small gray padvert">
-            Наименование
-          </div>
-          <div class="col-3 lato small gray padvert">
-            Количество
-          </div>
-          <div class="col-3 lato small gray padvert">
-            Стоимость
-          </div>
-          <div class="col-3 lato small gray padvert">
-            Изменения
-          </div>
+          <div class="col-5 lato small gray padvert">Наименование</div>
+          <div class="col-2 lato small gray padvert">Количество</div>
+          <div class="col-2 lato small gray padvert">Стоимость</div>
+          <div class="col-2 lato small gray padvert">Изменения</div>
           <div class="line"></div>
         </div>
 
-        <div class="row">
-          <div class="col-3 lato small black padvert">
-            Хлеб Подольский
-          </div>
-          <div class="col-3 lato small black padvert">
-            10 штук
-          </div>
-          <div class="col-3 lato small black padvert">
-            350 р
-          </div>
-          <div class="col-3 lato small red padvert">
-            10 шт
-          </div>
-          <div class="line"></div>
-        </div>
-
-        <div class="row">
-          <div class="col-3 lato small black padvert">
-            Хрустящий бетон
-          </div>
-          <div class="col-3 lato small black padvert">
-            10 штук
-          </div>
-          <div class="col-3 lato small black padvert">
-            1500 р
-          </div>
-          <div class="col-3 lato small black padvert">
-            без изменений
-          </div>
-          <div class="line"></div>
-        </div>
-
-        <div class="row">
-          <div class="col-3 lato small black padvert">
-            Пирожок с ничем
-          </div>
-          <div class="col-3 lato small black padvert">
-            100 штук
-          </div>
-          <div class="col-3 lato small black padvert">
-            10000 р
-          </div>
-          <div class="col-3 lato small green padvert">
-            10 шт
-          </div>
-          <div class="line"></div>
-        </div>
-
-        <div class="row">
-          <div class="col-3 lato small black padvert">
-            Чай поставьте
-          </div>
-          <div class="col-3 lato small black padvert">
-            100 штук
-          </div>
-          <div class="col-3 lato small black padvert">
-            10000 р
-          </div>
-          <div class="col-3 lato small red padvert">
-            10 шт
-          </div>
+        <div v-for="(qty, name, idx) in this.stateStore.prod">
+          <ordr-row :name="name" :qty="qty[0]" :price="qty[1]" :prev="qty[2]"></ordr-row>
         </div>
       </div>
     </div>
+
+    <stats-bar
+      :first_caption="'Общее количество товаров'"
+      :first_value="this.stateStore.total"
+      :second_caption="'Сумма закупок'"
+      :second_value="this.stateStore.price + ' р'"
+    ></stats-bar>
   </div>
 
-  <diff-list :caption="'Убрано из заказа'" :color="'red'" :list="this.removed"></diff-list>
-  <diff-list :caption="'Добавлено в заказ'" :color="'green'" :list="this.added"></diff-list>
+  <removed-diff-list
+    :caption="'Убрано из заказа'"
+    :color="'red'"
+    :list="this.stateStore.prod"
+  ></removed-diff-list>
+  <added-diff-list
+    :caption="'Добавлено в заказ'"
+    :color="'green'"
+    :list="this.stateStore.prod"
+  ></added-diff-list>
 
   <div class="bottom"></div>
 </template>
@@ -222,7 +171,7 @@ export default defineComponent({
 
 .line {
   width: 100%;
-  border-bottom: 1px solid #C1A97E;
+  border-bottom: 1px solid #c1a97e;
 }
 
 .bottom {
