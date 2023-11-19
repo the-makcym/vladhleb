@@ -24,11 +24,7 @@ export default defineComponent({
   },
 
   methods: {
-    aboba() {
-      obj = {
-        'аче всмялде': 10
-      }
-    }
+    
   }
 })
 </script>

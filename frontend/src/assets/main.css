@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kdam+Thmor+Pro&family=Lato&family=Yeseva+One&display=swap');
 
 :root {
   color-scheme: light;
@@ -41,14 +41,23 @@ div {
   color: black;
 }
 
-.inter {
-  font-family: 'Inter', sans-serif;
+.yeseva {
+  font-family: 'Yeseva One', serif;
   font-weight: 400;
 }
 
-.roboto {
-  font-family: 'Roboto', sans-serif;
+.lato {
+  font-family: 'Lato', sans-serif;
   font-weight: 400;
+}
+
+.kdam {
+  font-family: 'Kdam Thmor Pro', sans-serif;
+  font-weight: 400;
+}
+
+.xxl {
+  font-size: 3.5em;
 }
 
 .extralarge {
@@ -64,21 +73,36 @@ div {
 }
 
 .small {
-  font-size: 0.9em;
+  font-size: 1em;
 }
 
-.gray {
-  color: #8c8c8c;
+.black {
+  color: #212529;
+}
+
+.navy {
+  color: #14323E;
+}
+.navy-bg {
+  background-color: #14607E;
 }
 
 .red {
-  color: #ba1717;
+  color: #E64C32;
 }
 
 .green {
-  color: #1a8e42;
+  color: #41D172;
 }
 
 .blue {
-  color: #14607e;
+  color: #98CEE4;
+}
+
+.pale {
+  color: #C1A97E;
+}
+
+.white {
+  color: white;
 }

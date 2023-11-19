@@ -1,20 +1,26 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import AuthPage from '../pages/AuthPage.vue'
-import OrderPage from '../pages/OrderPage.vue'
+import HomeView from '@/pages/HomeView.vue'
+import OrdrView from '@/pages/OrdrView.vue'
+import MakeView from '@/pages/MakeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/auth',
-      name: 'auth',
-      component: AuthPage
+      path: '/',
+      name: 'home',
+      component: HomeView
     },
     {
-      path: '/order',
-      name: 'order',
-      component: OrderPage
-    }
+      path: '/ordr',
+      name: 'ordr',
+      component: OrdrView
+    },
+    {
+      path: '/make',
+      name: 'make',
+      component: MakeView
+    },
   ]
 })
 
