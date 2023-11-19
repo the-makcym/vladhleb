@@ -80,27 +80,35 @@ div {
   color: #212529;
 }
 
+.gray {
+  color: #8C8C8C;
+}
+
 .navy {
-  color: #14323E;
+  color: #14323e;
 }
 .navy-bg {
-  background-color: #14607E;
+  background-color: #14607e;
 }
 
 .red {
-  color: #E64C32;
+  color: #e64c32;
 }
 
 .green {
-  color: #41D172;
+  color: #41d172;
 }
 
 .blue {
-  color: #98CEE4;
+  color: #98cee4;
 }
 
 .pale {
-  color: #C1A97E;
+  color: #c1a97e;
+}
+
+.pale-bg {
+  background-color: #c1a97e;
 }
 
 .white {

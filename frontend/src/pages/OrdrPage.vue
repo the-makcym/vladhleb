@@ -32,24 +32,20 @@ export default {
 </script>
 
 <template>
+  <div class="status">
+    <p class="lato small gray">Дата:</p>
+    <p class="lato small black">Сегодня, 19 ноября 2023</p>
+  </div>
+
   <diff-list :caption="'Добавлено в заказ'" :color="'green'" :list="this.added"></diff-list>
   <diff-list :caption="'Убрано из заказа'" :color="'red'" :list="this.removed"></diff-list>
-  <diff-list :caption="'Изменено'" :color="'blue'" :list="this.diffs"></diff-list>
 </template>
 
 <style scoped>
-.wrapper {
-  margin: auto;
-  padding-top: 3em;
-  width: 80vw;
-}
-
-.padded {
-  margin: 0.8em;
-}
-
-.line {
-  width: 100%;
-  border-bottom: 2px solid black;
+.status {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
 }
 </style>

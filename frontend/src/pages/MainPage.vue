@@ -1,24 +1,22 @@
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 import { RouterView } from 'vue-router'
-
 
 export default defineComponent({
   name: 'main-page',
 
   data() {
-    return {
-    }
-  },
+    return {}
+  }
 })
 </script>
 
 <template>
   <div class="sidebar">
-    <img src="" alt="">
-    <img src="" alt="">
+    <img src="" alt="" />
+    <img src="" alt="" />
     <p class="lato black small">Товары</p>
-    <img src="" alt="">
+    <img src="" alt="" />
     <p class="lato black small">Отчеты</p>
   </div>
 
@@ -56,6 +54,6 @@ export default defineComponent({
 
 .line {
   width: 100%;
-  border-bottom: 2px solid #C1A97E;
+  border-bottom: 2px solid #c1a97e;
 }
 </style>

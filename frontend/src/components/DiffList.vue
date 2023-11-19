@@ -23,14 +23,12 @@ export default defineComponent({
     }
   },
 
-  methods: {
-    
-  }
+  methods: {}
 })
 </script>
 
 <template>
-  <p class="roboto small" :class="colorClass">{{ caption }}</p>
+  <p class="lato large padvert" :class="colorClass">{{ caption }}</p>
   <div class="container">
     <div class="row">
       <div v-for="(qty, name, idx) in this.list" class="col">
@@ -39,3 +37,9 @@ export default defineComponent({
     </div>
   </div>
 </template>
+
+<style scoped>
+.padvert {
+  padding: 1em 0;
+}
+</style>

@@ -8,8 +8,8 @@ export default defineComponent({
     first_caption: '',
     first_value: '',
     second_caption: '',
-    second_value: '',
-  },
+    second_value: ''
+  }
 })
 </script>
 

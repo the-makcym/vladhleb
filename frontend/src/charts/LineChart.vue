@@ -13,15 +13,7 @@ import { Line } from 'vue-chartjs'
 import * as chartConfig from './chartConfig.js'
 import { defineComponent } from 'vue'
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-)
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend)
 
 export default defineComponent({
   name: 'line-chart',

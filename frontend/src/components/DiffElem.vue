@@ -12,12 +12,24 @@ export default defineComponent({
 </script>
 
 <template>
-  <h2 class="roboto small name">{{ name }}</h2>
-  <p class="roboto small qty">{{ qty }}</p>
+  <div class="wrapper">
+      <h2 class="lato small black name">{{ name }}</h2>
+      <p class="lato small gray qty">{{ qty }} шт</p>
+  </div>
 </template>
 
 <style scoped>
 .name {
   white-space: nowrap;
+  text-align: left;
+}
+
+.wrapper {
+  padding: 1em;
+  margin: 1em 0;
+  display: inline-block;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background-color: #f5edde;
 }
 </style>

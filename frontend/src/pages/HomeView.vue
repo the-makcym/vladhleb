@@ -1,13 +1,13 @@
 <script>
-import { defineComponent } from 'vue';
-import { RouterLink } from 'vue-router';
+import { defineComponent } from 'vue'
+import { RouterLink } from 'vue-router'
 import LineChart from '@/charts/LineChart.vue'
-import StatsBar from '../components/StatsBar.vue';
+import StatsBar from '../components/StatsBar.vue'
 
 export default defineComponent({
   name: 'home-view',
 
-  components: { LineChart, StatsBar },
+  components: { LineChart, StatsBar }
 })
 </script>
 
@@ -51,7 +51,7 @@ export default defineComponent({
   margin: 2em 0;
   padding: 2em;
   width: 70%;
-  background-color: #F5EDDE;
+  background-color: #f5edde;
   box-sizing: border-box;
   border-radius: 21px;
 }
@@ -74,12 +74,12 @@ export default defineComponent({
 
 .button {
   border-radius: 3em;
-  padding: 0.7em 1.5em;
-  margin-right: 1em;
+  padding: 0.5em 1.3em;
+  margin-right: 0.8em;
 }
 
 .prev {
   background-color: white;
-  border: 2px solid #C1A97E;
+  border: 2px solid #c1a97e;
 }
 </style>
